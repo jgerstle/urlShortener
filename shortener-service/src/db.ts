@@ -1,12 +1,11 @@
 import { Client } from 'pg';
 
-const client = new Client({
-	database: 'urlshortener',
-	password: 'password',
-	user: 'postgres',
-});
-
-export async function query(qry: string, params: string[]) {
+export async function query(qry: string, params?: string[]) {
+	const client = new Client({
+		database: 'urlshortener',
+		password: 'password',
+		user: 'postgres',
+	});
 	await client.connect();
 	const res = await client.query(qry, params);
 	await client.end();
